@@ -28,7 +28,12 @@ const PropertyDetails = () => {
 
     const { data, isLoading, isError } = queryResult;
 
-    const propertyDetails = data?.data ?? {};
+    const propertyDetails = data?. data ?? {};
+    // console.log(user.userid, "property");
+
+    console.log(propertyDetails._id, "id");
+
+    
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -38,9 +43,15 @@ const PropertyDetails = () => {
         return <div>Something went wrong!</div>;
     }
 
+    // console.log(propertyDetails.creator);
+    
+
     const isCurrentUser = user.email === propertyDetails.creator.email;
+    // console.log(isCurrentUser, "user");
+    
 
     const handleDeleteProperty = () => {
+        // eslint-disable-next-line no-restricted-globals
         const response = confirm(
             "Are you sure you want to delete this property?",
         );
@@ -207,11 +218,11 @@ const PropertyDetails = () => {
                         >
                             <img
                                 src={
-                                    checkImage(propertyDetails.creator.avatar)
-                                        ? propertyDetails.creator.avatar
+                                    checkImage(propertyDetails.photo)
+                                        ? propertyDetails.photo
                                         : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
                                 }
-                                alt="avatar"
+                                alt="photo"
                                 width={90}
                                 height={90}
                                 style={{
@@ -226,7 +237,7 @@ const PropertyDetails = () => {
                                     fontWeight={600}
                                     color="#11142D"
                                 >
-                                    {propertyDetails.creator.name}
+                                    {propertyDetails.name}
                                 </Typography>
                                 <Typography
                                     mt="5px"
@@ -260,7 +271,7 @@ const PropertyDetails = () => {
                                 fontWeight={600}
                                 color="#11142D"
                             >
-                                {propertyDetails.creator.allProperties.length}{" "}
+                                {propertyDetails.allProperties}{" "}
                                 Properties
                             </Typography>
                         </Stack>

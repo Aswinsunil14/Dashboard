@@ -1,6 +1,6 @@
 import { Typography, Box, Stack } from "@mui/material";
 
-import { useDelete, useGetIdentity, useShow } from "@pankod/refine-core";
+import { useDelete, useGetIdentity, useShow } from "@refinedev/core";
 import { useParams, useNavigate } from "react-router-dom";
 import {
     ChatBubble,
@@ -21,7 +21,9 @@ function checkImage(url: any) {
 
 const PropertyDetails = () => {
     const navigate = useNavigate();
-    const { data: user } = useGetIdentity();
+    const { data: user } = useGetIdentity({
+        v3LegacyAuthProviderCompatible: true
+    });
     const { queryResult } = useShow();
     const { mutate } = useDelete();
     const { id } = useParams();

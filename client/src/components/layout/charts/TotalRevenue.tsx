@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
-import {
-  Box, Typography, Stack
-} from '@pankod/refine-mui'
+import { Box, Typography, Stack } from "@mui/material";
 import { ArrowCircleUpRounded } from '@mui/icons-material'
 import  {TotalRevenueOptions, TotalRevenueSeries} from './charts.config'
 

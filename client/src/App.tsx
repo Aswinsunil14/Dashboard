@@ -1,14 +1,8 @@
 import React from "react";
 
-import { Refine, AuthProvider } from "@pankod/refine-core";
-import {
-  notificationProvider,
-  RefineSnackbarProvider,
-  CssBaseline,
-  GlobalStyles,
-  ReadyPage,
-  ErrorComponent,
-} from "@pankod/refine-mui";
+ import { Refine, LegacyAuthProvider as AuthProvider } from "@refinedev/core";
+import { notificationProvider, RefineSnackbarProvider, ReadyPage, ErrorComponent } from "@refinedev/mui";
+import { CssBaseline, GlobalStyles } from "@mui/material";
 import {
   AccountCircleOutlined,
   ChatBubbleOutline,
@@ -17,11 +11,9 @@ import {
   VillaOutlined,
 } from "@mui/icons-material"
 
-import dataProvider from "@pankod/refine-simple-rest";
-import { MuiInferencer } from "@pankod/refine-inferencer/mui";
-import routerProvider from "@pankod/refine-react-router-v6";
+import dataProvider from "@refinedev/simple-rest";
+import routerProvider from "@refinedev/react-router-v6/legacy";
 import axios, { AxiosRequestConfig } from "axios";
-import { ColorModeContextProvider } from "contexts";
 import { Title, Sider, Layout, Header } from "components/layout";
 import { Login, Home, Agents, MyProfile, PropertyDetails, AllProperties, CreateProperty, AgentProfile, EditProperty } from "pages";
 import { CredentialResponse } from "interfaces/google";
@@ -49,7 +41,7 @@ function App() {
 
             if (profileObj) {
                 const response = await fetch(
-                    "http://localhost:8080/api/v1/users",
+                    "https://refine-dashboard-ez34.onrender.com/api/v1/users",
                     {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -114,12 +106,12 @@ function App() {
     };
 
     return (
-        <ColorModeContextProvider>
+        <div>
             <CssBaseline />
             <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
             <RefineSnackbarProvider>
                 <Refine
-                    dataProvider={dataProvider("http://localhost:8080/api/v1")}
+                    dataProvider={dataProvider("https://refine-dashboard-ez34.onrender.com/api/v1")}
                     notificationProvider={notificationProvider}
                     ReadyPage={ReadyPage}
                     catchAll={<ErrorComponent />}
@@ -150,7 +142,7 @@ function App() {
                         },
                         {
                             name: "my-profile",
-                            options: { label: "My Profile " },
+                            meta: { label: "My Profile " },
                             list: MyProfile,
                             icon: <AccountCircleOutlined />,
                         },
@@ -159,13 +151,14 @@ function App() {
                     Sider={Sider}
                     Layout={Layout}
                     Header={Header}
-                    routerProvider={routerProvider}
-                    authProvider={authProvider}
+                    legacyRouterProvider={routerProvider}
+                    legacyAuthProvider={authProvider}
                     LoginPage={Login}
                     DashboardPage={Home}
                 />
             </RefineSnackbarProvider>
-        </ColorModeContextProvider>
+            </div>
+     
     );
 }
 

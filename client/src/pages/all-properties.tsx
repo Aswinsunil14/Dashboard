@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import { Add, Apartment } from '@mui/icons-material'
-import { useTable } from '@pankod/refine-core'
-import {Box, Stack, TextField, Typography, Select,MenuItem} from '@pankod/refine-mui'
-import { useNavigate } from '@pankod/refine-react-router-v6'
+import { useTable } from "@refinedev/core";
+import { Box, Stack, TextField, Typography, Select, MenuItem } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { PropertyCard, CustomButton } from 'components'
 
 const AllProperties = () => {
@@ -10,7 +10,7 @@ const AllProperties = () => {
 
   const {
     tableQueryResult: {data, isLoading, isError}, current, setCurrent, setPageSize,
-    pageCount, sorter,setSorter, filters, setFilters
+    pageCount, sorters: sorter,setSorters: setSorter, filters, setFilters
   } = useTable();
 
   const allProperties = data?.data ?? [];

@@ -1,5 +1,5 @@
 import { EmailOutlined, LocationCity, Phone, Place } from "@mui/icons-material";
-import { useGetIdentity } from "@pankod/refine-core";
+import { useGetIdentity } from "@refinedev/core";
 import { Box, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -32,7 +32,9 @@ const AgentCard = ({
     avatar,
     noOfProperties,
 }: AgentCardProp) => {
-    const { data: currentUser } = useGetIdentity();
+    const { data: currentUser } = useGetIdentity({
+        v3LegacyAuthProviderCompatible: true
+    });
 
     const generateLink = () => {
         if (currentUser.email === email) return "/my-profile";
